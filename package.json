@@ -1,0 +1,26 @@
+{
+  "name": "url_shortener",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongodb": "^2.2.16",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zach-long/url_shortener.git"
+  },
+  "author": "Zachary Long",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zach-long/url_shortener/issues"
+  },
+  "homepage": "https://github.com/zach-long/url_shortener#readme"
+}
