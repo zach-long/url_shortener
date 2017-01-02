@@ -7,6 +7,7 @@ const express = require('express')
 const app = express()
 
 const shortener = require('./app/app.js')
+const routes = require('./app/routes.js')
 
 // link views
 app.set('views', path.join(__dirname, 'views'))
@@ -25,6 +26,7 @@ mongo.MongoClient.connect('mongodb://localhost:27017/url_shortener', (err, db) =
   })
 
   // call external files
+  routes(app, db)
   shortener(app, db)
 })
 
