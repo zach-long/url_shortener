@@ -1,8 +1,7 @@
 'use strict'
 
 // imports
-const path = require('path')
-const mongo = require('mongodb')
+const mongodb = require('mongodb').MongoClient
 const express = require('express')
 const app = express()
 
@@ -12,9 +11,9 @@ const routes = require('./app/routes.js')
 // connect database
 const prodDB = process.env.MONGOLAB_URI
 const testDB = 'mongodb://localhost:27017/url_db'
-mongo.MongoClient.connect(prodDB || testDB, (err, db) => {
-  let success = "MongoDB connected successfully!"
-  let fail = "MongoDB was unable to connect, '" + err + "'"
+mongodb.connect(prodDB || testDB, (err, db) => {
+  const success = "MongoDB connected successfully!"
+  const fail = "MongoDB was unable to connect, '" + err + "'"
   !err ? console.log(success) : console.log(fail)
 
   // configure db

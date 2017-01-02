@@ -2,8 +2,8 @@
 
 // imports
 const path = require('path')
-const express = require('express')
 
+// display 'index.html' on root request
 module.exports = (app, db) => {
   app.get('/', (req, res) => {
     // bad bad bad
