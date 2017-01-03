@@ -9,8 +9,4 @@ module.exports = (app, db) => {
     // bad bad bad
     res.sendFile(path.join(__dirname, '../views/index.html'))
   })
-
-  app.get('/test', (req, res) => {
-    res.send(process.env)
-  })
 }

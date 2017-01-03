@@ -19,7 +19,7 @@ mongodb.connect(prodDB || testDB, (err, db) => {
   // configure db
   db.createCollection("urls", {
     capped: true,
-    size: 5000,
+    size: 5000000,
     max: 5000
   })
 

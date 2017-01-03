@@ -17,14 +17,7 @@ module.exports = (app, db) => {
   }
 
   function searchDatabase(url, db, res) {
-    let links = db.collection("urls")
 
-    console.log("Searching database: " + links.find())
-    console.log("Looking for 'short' " + url)
-    links.findOne({ "short": url }, (err, result) => {
-      if (err) throw err
-      if (result) { res.redirect(result["full"]) }
-    })
   }
 
   function postShortUrl(req, res) {
@@ -42,13 +35,7 @@ module.exports = (app, db) => {
   }
 
   function createEntry(o, db) {
-    let links = db.collection("urls")
 
-    console.log("Saved to database! " + o.short + " -> " + o.full)
-
-    links.save(o, (err, res) => {
-      !err ? console.log("Entry saved to database") : console.log(err)
-    })
   }
 
 }
