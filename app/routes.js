@@ -14,7 +14,7 @@ module.exports = (app, db) => {
     db.collection("urls", (err, col) => {
       col.find().toArray((err, docs) => {
         console.log(docs)
-        res.send(docs)
+        res.send("( ͡° ͜ʖ ͡°)")
       })
     })
   })

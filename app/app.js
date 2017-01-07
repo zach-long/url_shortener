@@ -8,7 +8,7 @@
 module.exports = (app, db) => {
 
   app.get('/:url', getShortUrl)
-  app.get('/new/:url', postShortUrl)
+  app.get('/new/:url*', postShortUrl)
 
   function getShortUrl(req, res) {
     let url = req.params.url
@@ -24,7 +24,7 @@ module.exports = (app, db) => {
       if (err) throw err
       if (result) {
         console.log("Short url found successfully!")
-        res.redirect("http://" + result.full)
+        res.redirect(result.full)
       } else {
         console.log("Short url not found")
         res.send("Not found")
@@ -33,17 +33,23 @@ module.exports = (app, db) => {
   }
 
   function postShortUrl(req, res) {
-    let url = req.params.url
+    let url = req.url.slice(5)
     let randomNumber = Math.floor(Math.random() * 5000000)
     let doc = {}
-    console.log("Acknowledged POST request for ulr '" + url + "'")
+    console.log("Acknowledged POST request for url '" + url + "'")
 
     doc["full"] = url
     doc["short"] = randomNumber.toString().substring(0, 6)
 
+    validateEntry(doc["full"])
     createEntry(doc, db)
 
     res.send(doc)
+  }
+
+  function validateEntry(fullUrl) {
+    console.log("Validating '" + fullUrl + "'")
+
   }
 
   function createEntry(o, db) {
