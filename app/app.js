@@ -1,5 +1,7 @@
 'use strict'
 
+const validator = require('valid-url')
+
 /*      logic that controls app flow
     GET will redirect to the URL associated
     with the paired short-url in the database
@@ -12,9 +14,11 @@ module.exports = (app, db) => {
 
   function getShortUrl(req, res) {
     let url = req.params.url
-    console.log("Acknowledged GET request for url '" + url + "'")
+    if (url != 'favicon.ico') {
+      console.log("Acknowledged GET request for url '" + url + "'")
 
-    if (url != 'favicon.ico') { searchDatabase(url, db, res) }
+      searchDatabase(url, db, res)
+    }
   }
 
   function searchDatabase(url, db, res) {
@@ -23,7 +27,7 @@ module.exports = (app, db) => {
     urlsCollection.findOne( {"short": url}, (err, result) => {
       if (err) throw err
       if (result) {
-        console.log("Short url found successfully!")
+        console.log("Redirecting to '" + result.full + "'")
         res.redirect(result.full)
       } else {
         console.log("Short url not found")
@@ -41,15 +45,14 @@ module.exports = (app, db) => {
     doc["full"] = url
     doc["short"] = randomNumber.toString().substring(0, 6)
 
-    validateEntry(doc["full"])
-    createEntry(doc, db)
-
-    res.send(doc)
-  }
-
-  function validateEntry(fullUrl) {
-    console.log("Validating '" + fullUrl + "'")
-
+    if (validator.isWebUri(url)) {
+      console.log("Valid url provided")
+      createEntry(doc, db)
+      res.send(doc)
+    } else {
+      console.log("Invalid url provided")
+      res.send("Please provide a valid url, including protocol")
+    }
   }
 
   function createEntry(o, db) {
