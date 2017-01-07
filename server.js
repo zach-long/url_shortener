@@ -22,6 +22,7 @@ mongodb.connect(prodDB || testDB, (err, db) => {
     size: 5000000,
     max: 5000
   })
+  console.log("Created collection 'urls'")
 
   // call external files
   routes(app, db)

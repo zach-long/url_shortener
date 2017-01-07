@@ -9,4 +9,13 @@ module.exports = (app, db) => {
     // bad bad bad
     res.sendFile(path.join(__dirname, '../views/index.html'))
   })
+
+  app.get('/database', (req, res) => {
+    db.collection("urls", (err, col) => {
+      col.find().toArray((err, docs) => {
+        console.log(docs)
+        res.send(docs)
+      })
+    })
+  })
 }

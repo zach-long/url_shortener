@@ -12,22 +12,34 @@ module.exports = (app, db) => {
 
   function getShortUrl(req, res) {
     let url = req.params.url
+    console.log("Acknowledged GET request for url '" + url + "'")
 
-    searchDatabase(url, db, res)
+    if (url != 'favicon.ico') { searchDatabase(url, db, res) }
   }
 
   function searchDatabase(url, db, res) {
-
+    let urlsCollection = db.collection("urls")
+    console.log("Searching database for " + url)
+    urlsCollection.findOne( {"short": url}, (err, result) => {
+      if (err) throw err
+      if (result) {
+        console.log("Short url found successfully!")
+        res.redirect("http://" + result.full)
+      } else {
+        console.log("Short url not found")
+        res.send("Not found")
+      }
+    })
   }
 
   function postShortUrl(req, res) {
     let url = req.params.url
     let randomNumber = Math.floor(Math.random() * 5000000)
-    randomNumber.toString().substring(0, 6)
     let doc = {}
+    console.log("Acknowledged POST request for ulr '" + url + "'")
 
     doc["full"] = url
-    doc["short"] = randomNumber
+    doc["short"] = randomNumber.toString().substring(0, 6)
 
     createEntry(doc, db)
 
@@ -35,7 +47,13 @@ module.exports = (app, db) => {
   }
 
   function createEntry(o, db) {
+    let urlsCollection = db.collection("urls")
+    console.log("Preparing to store object '" + o + "' in the database '" + urlsCollection + "'")
 
+    urlsCollection.save(o, (err, result) => {
+      if (err) throw err
+      if (result) console.log("Document saved successfully!")
+    })
   }
 
 }
