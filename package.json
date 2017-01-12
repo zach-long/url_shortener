@@ -22,5 +22,11 @@
     "url": "https://github.com/zach-long/url_shortener/issues"
   },
   "homepage": "https://github.com/zach-long/url_shortener#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "path": "*",
+    "mongodb": "*",
+    "express": "*",
+    "valid-url": "*"
+  }
 }

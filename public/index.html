@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Shortener Microservice</title>
+  <link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>URL Shortening API - Node.js Microservice</h1>
+  <p>A Node.js server paired with a MongoDB database. It will accept a URL following the '/new' path and return an object with a randomly generated shortened number sequenced paired to that URL. Passing this number sequence onto the root path will redirect to the paired URL.</p>
+  <p><a href="https://github.com/zach-long/url_shortener" target="_blank"><strong>View my code on GitHub</strong></a></p>
+
+  <h3>See a live example:</h3>
+  <input id="request-field" type="text" value="new/http://www.stackoverflow.com">
+  <button onclick="httpRequest();">Submit</button>
+  <pre id="live-sample"></pre>
+  <script type="text/javascript" src="scripts.js"></script>
+
+  <h3>Sample test cases:</h3>
+  <p>Passing a valid URL returns JSON with a paired short url - <a href="https://afternoon-crag-81590.herokuapp.com/new/http://stackoverflow.com" target="_blank">https://afternoon-crag-81590.herokuapp.com/new/http://stackoverflow.com</a></p>
+  <p>Accessing a short-url redirects to the paired site - <a href="https://afternoon-crag-81590.herokuapp.com/374212" target="_blank">https://afternoon-crag-81590.herokuapp.com/374212</a></p>
+  <p>Passing an invalid URL (here, no protocol), will return an error - <a href="https://afternoon-crag-81590.herokuapp.com/new/google.com" target="_blank">https://afternoon-crag-81590.herokuapp.com/new/google.com</a></p>
+</body>
+</html>

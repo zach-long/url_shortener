@@ -1,11 +1,11 @@
 'use strict'
 
 // imports
+const path = require('path')
 const mongodb = require('mongodb').MongoClient
 const express = require('express')
 const app = express()
 
-const shortener = require('./app/app.js')
 const routes = require('./app/routes.js')
 
 // connect database
@@ -15,7 +15,7 @@ mongodb.connect(prodDB || testDB, (err, db) => {
   const success = "MongoDB connected successfully!"
   const fail = "MongoDB was unable to connect, '" + err + "'"
   !err ? console.log(success) : console.log(fail)
-console.log(process.env)
+
   // configure db
   db.createCollection("urls", {
     capped: true,
@@ -24,9 +24,11 @@ console.log(process.env)
   })
   console.log("Created collection 'urls'")
 
+  // set public directory
+  app.use(express.static(path.join(__dirname, 'public')))
+
   // call external files
   routes(app, db)
-  shortener(app, db)
 })
 
 // start server
