@@ -16,11 +16,15 @@
   <input id="request-field" type="text" value="new/http://www.stackoverflow.com">
   <button onclick="httpRequest();">Submit</button>
   <pre id="live-sample"></pre>
-  <script type="text/javascript" src="scripts.js"></script>
+  <p>You can paste the returned "short" value into your browser URL bar.
+    <br>Ex: <u>https://afternoon-crag-81590.herokuapp.com/<i>your-numbers-here</i></u>
+  </p>
 
   <h3>Sample test cases:</h3>
   <p>Passing a valid URL returns JSON with a paired short url - <a href="https://afternoon-crag-81590.herokuapp.com/new/http://stackoverflow.com" target="_blank">https://afternoon-crag-81590.herokuapp.com/new/http://stackoverflow.com</a></p>
   <p>Accessing a short-url redirects to the paired site - <a href="https://afternoon-crag-81590.herokuapp.com/374212" target="_blank">https://afternoon-crag-81590.herokuapp.com/374212</a></p>
   <p>Passing an invalid URL (here, no protocol), will return an error - <a href="https://afternoon-crag-81590.herokuapp.com/new/google.com" target="_blank">https://afternoon-crag-81590.herokuapp.com/new/google.com</a></p>
+
+  <script type="text/javascript" src="scripts.js"></script>
 </body>
 </html>
